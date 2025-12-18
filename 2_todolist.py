@@ -27,3 +27,4 @@ else:
 
     for i in range(len(st.session_state.todos)):   # for
         st.write(f"{i+1}. {st.session_state.todos[i].task}")
+
