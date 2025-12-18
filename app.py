@@ -20,3 +20,4 @@ elif page == "Halaman 3 - Jadwal":
     exec(open("3_schedule.py", encoding="utf-8").read())
 elif page == "Halaman 4 - Notifikasi":
     exec(open("4_notification.py", encoding="utf-8").read())
+
