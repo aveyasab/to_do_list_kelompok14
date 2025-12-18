@@ -20,3 +20,4 @@ if st.button("Simpan"):
 
 if st.session_state.name:
     st.info(f"Halo, {st.session_state.name} 👋")
+
