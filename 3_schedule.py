@@ -1,28 +1,29 @@
 import streamlit as st
-from datetime import datetime, date, time
+from datetime import date, time, datetime
 
-st.title("Halaman 3 - Tanggal & Waktu")
+# INIT
+if "todos" not in st.session_state:
+    st.session_state.todos = []
 
-if not st.session_state.todos:
-    st.warning("Belum ada to do di Halaman 2")
+st.title("Halaman 3 - Jadwal")
+
+if len(st.session_state.todos) == 0:
+    st.warning("Belum ada to do")
 else:
-    selected = st.selectbox(
-        "Pilih To Do",
+    pilihan = st.selectbox(
+        "Pilih tugas",
         range(len(st.session_state.todos)),
         format_func=lambda x: st.session_state.todos[x].task
     )
 
-    tgl = st.date_input("Pilih tanggal", date.today())
-    jam = st.time_input("Pilih waktu", time(12, 0))
+    tgl = st.date_input("Tanggal", date.today())
+    jam = st.time_input("Waktu", time(12, 0))
 
     if st.button("Simpan Jadwal"):
         dt = datetime.combine(tgl, jam)
-        st.session_state.todos[selected].set_datetime(dt)
-        st.success("Tanggal dan waktu berhasil disimpan")
+        st.session_state.todos[pilihan].set_datetime(dt)
+        st.success("Jadwal disimpan")
 
-    st.subheader("Jadwal To Do")
-    for t in st.session_state.todos:
+    for t in st.session_state.todos:    # for
         if t.datetime:
             st.write(f"{t.task} → {t.datetime}")
-
-

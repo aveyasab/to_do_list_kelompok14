@@ -1,15 +1,21 @@
-
 import streamlit as st
+
+# INIT SESSION
+if "name" not in st.session_state:
+    st.session_state.name = ""
 
 st.title("Halaman 1 - Input Nama")
 
-name = st.text_input("Masukkan nama kamu")
+def simpan_nama(nama):        # function
+    st.session_state.name = nama
 
-if st.button("Simpan Nama"):
-    if name:
-        st.session_state.name = name
-        st.success("Nama berhasil disimpan")
-    else:
+nama = st.text_input("Masukkan nama kamu")
+
+if st.button("Simpan"):
+    if nama != "":            # if
+        simpan_nama(nama)
+        st.success("Nama tersimpan")
+    else:                     # else
         st.warning("Nama tidak boleh kosong")
 
 if st.session_state.name:

@@ -1,21 +1,29 @@
 import streamlit as st
-from app import Todo
+from todo import Todo
+
+# INIT
+if "name" not in st.session_state:
+    st.session_state.name = ""
+
+if "todos" not in st.session_state:
+    st.session_state.todos = []
 
 st.title("Halaman 2 - To Do List")
 
-if not st.session_state.name:
-    st.warning("Silakan isi nama di Halaman 1 terlebih dahulu")
+if st.session_state.name == "":
+    st.warning("Isi nama dulu di Halaman 1")
 else:
     task = st.text_input("Masukkan tugas")
 
-    if st.button("Tambah To Do"):
+    if st.button("Tambah"):
         if task:
-            todo_obj = Todo(task)
-            st.session_state.todos.append(todo_obj)
-            st.success("To do berhasil ditambahkan")
+            todo = Todo(task)          # object
+            st.session_state.todos.append(todo)
+            st.success("Tugas ditambahkan")
         else:
-            st.warning("Tugas tidak boleh kosong")
+            st.warning("Tugas kosong")
 
-    st.subheader("Daftar To Do")
-    for i, t in enumerate(st.session_state.todos):
-        st.write(f"{i+1}. {t.task}")
+    st.subheader("Daftar Tugas")
+
+    for i in range(len(st.session_state.todos)):   # for
+        st.write(f"{i+1}. {st.session_state.todos[i].task}")
